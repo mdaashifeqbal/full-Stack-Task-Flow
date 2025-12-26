@@ -1,36 +1,18 @@
-import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import NoteCard from '../NoteCard/NoteCard'
+import React, { useEffect, useState } from "react";
+import Navbar from "../Navbar/Navbar";
+import NoteCard from "../NoteCard/NoteCard";
+import api from "../../api/axios";
+import Spinner from "../Loader/Spinner";
+import { Outlet } from "react-router-dom";
+import NotesHomePage from "../../Pages/DashboardPages/NotesHomePage";
 
 const Dashboard = () => {
   return (
-    <div className='h-full w-full bg-gray-600'>
-      <Navbar/>
-      <div className='w-full h-[90vh] overflow-scroll grid grid-cols-4 gap-5 px-15 py-2 '>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-             <NoteCard/>
-      </div>
+    <div className="h-screen w-full bg-gray-600">
+      <Navbar />
+      <Outlet/>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

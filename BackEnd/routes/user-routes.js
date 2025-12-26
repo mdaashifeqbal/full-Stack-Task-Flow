@@ -5,8 +5,11 @@ const router = express.Router();
 const {
   userRegister,
   userLogin,
+  me,
+  logout,
 } = require("../controllers/userControllers/user-auth");
 
+const { isLoggedIn } = require("../middlewares/isLoggedIn");
 router.get("/", (req, res) => {
   res.send("user route working fine baby");
 });
@@ -17,24 +20,10 @@ router.post("/register", userRegister);
 //existing user login route
 router.post("/login", userLogin);
 
-//user logout route
-router.post("/logout", (req, res) => {
-  try {
-    res.clearCookie("user_Token", {
-      httpOnly: true,
-    });
+//get user details route
+router.get("/me", isLoggedIn, me);
 
-    res.status(200).json({
-      message: "Logged out successfully",
-      success: true,
-    });
-  } catch (err) {
-    console.error("Logout error:", err.message);
-    res.status(500).json({
-      message: "Internal server error",
-      success: false,
-    });
-  }
-});
+//user logout route
+router.post("/logout", logout);
 
 module.exports = router;

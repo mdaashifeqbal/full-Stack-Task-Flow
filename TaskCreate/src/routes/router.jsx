@@ -3,6 +3,10 @@ import App from "../App";
 import Dashboard from "../components/Dashboard/Dashboard";
 import Home from "../Pages/HomePage/Home";
 import ProtectedRoute from "./ProtectedRoute";
+import SignUp from "../Pages/SignUp/SignUp";
+import CreateFlow from "../Pages/CreateFlow/CreateFlow";
+import NotesHomePage from "../Pages/DashboardPages/NotesHomePage";
+import NoteDetails from "../Pages/NotesDetails/NotesDetails";
 
 const router = createBrowserRouter([
   {
@@ -14,12 +18,30 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "dashboard", // ✅ NO leading slash
+        path: "signUp",
+        element: <SignUp />,
+      },
+      {
+        path: "dashboard",
         element: (
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
         ),
+        children: [
+          {
+            path: "",
+            element: <NotesHomePage />,
+          },
+          {
+            path: "create-flow",
+            element: <CreateFlow />,
+          },
+          {
+            path:"note-details/:id",
+            element:<NoteDetails/>
+          }
+        ],
       },
     ],
   },

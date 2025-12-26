@@ -7,8 +7,8 @@ module.exports.userRegister = async (req, res) => {
   const { fullName, userName, email, password } = req.body;
   if (!fullName || !userName || !email || !password)
     return res
-      .status(404)
-      .json({ message: "please fill valid credentails", success: false });
+      .status(400)
+      .json({ message: "please fill all fields ", success: false });
 
   try {
     const isUserExist = await userModel.findOne({ email });
@@ -32,9 +32,10 @@ module.exports.userRegister = async (req, res) => {
       sameSite: "strict",
       maxAge: 24 * 60 * 60 * 1000,
     });
-    res
-      .status(201)
-      .json({ message: "User registered successfully", success: true });
+    res.status(201).json({
+      message: "User registered successfully",
+      success: true,
+    });
   } catch (err) {
     console.log("error while creating user ", err.message);
     res.status(500).json({
@@ -47,7 +48,7 @@ module.exports.userRegister = async (req, res) => {
 //existing user login route
 module.exports.userLogin = async (req, res) => {
   const { email, password } = req.body;
-  if (!req.body.length<0) {
+  if (!req.body.length < 0) {
     return res
       .status(400)
       .json({ message: "please fill valid credentails", success: false });
@@ -80,12 +81,62 @@ module.exports.userLogin = async (req, res) => {
         sameSite: "strict",
         maxAge: 24 * 60 * 60 * 1000,
       });
-      res.status(200).json({ message: "Login Successful", success: true });
+      res
+        .status(200)
+        .json({
+          message: "Login Successful",
+          success: true,
+         
+        });
     }
   } catch (err) {
     console.log("error from login user", err.message);
     res.status(500).json({
       message: "Internal server error try again please",
+      success: false,
+    });
+  }
+};
+
+//send user details route
+module.exports.me=async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user._id).select("userName email");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+}
+
+//user logout route
+module.exports.logout = (req, res) => {
+  try {
+    res.clearCookie("user_Token", {
+      httpOnly: true,
+    });
+
+    res.status(200).json({
+      message: "Logged out successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.error("Logout error:", err.message);
+    res.status(500).json({
+      message: "Internal server error",
       success: false,
     });
   }

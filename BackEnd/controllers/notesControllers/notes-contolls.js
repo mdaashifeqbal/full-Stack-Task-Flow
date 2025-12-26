@@ -2,7 +2,7 @@ const userModel = require("../../models/user-model");
 const notesModel = require("../../models/notes-model");
 const { isLoggedIn } = require("../../middlewares/isLoggedIn");
 
-//create note controlls
+//create note route
 module.exports.createNote = async (req, res) => {
   const { title, content } = req.body;
 
@@ -35,7 +35,61 @@ module.exports.createNote = async (req, res) => {
   }
 };
 
-//delete note controlls
+
+//get note route
+module.exports.getNotes=async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const user = await userModel.findOne({ _id: userId }).populate("notes");
+    if (!user) {
+      return res.status(404).json({
+        message: "No new flow to show",
+        success: false,
+        notes: null,
+      });
+    }
+
+    res.status(200).json({
+      message: "data received successfully",
+      success: true,
+      notes: user.notes,
+    });
+  } catch (err) {
+    console.log("error while sending notes", err.message);
+    res
+      .status(500)
+      .json({ message: "internal server error", success: false, notes: null });
+  }
+}
+
+//get specific note route
+module.exports.specificNote=async (req, res) => {
+  const id = req.params.noteId;
+  try {
+    const note = await notesModel.findById( id );
+
+    if (!note)
+      return res
+        .status(404)
+        .json({ message: "Note not found", success: false, note: null });
+
+    res
+      .status(200)
+      .json({
+        message: "Note fetched successfully",
+        success: true,
+        note: note,
+      });
+  } catch (err) {
+    console.log("error while sending a specific note", err.message);
+    res
+      .status(500)
+      .json({ message: "internal server error", success: false, note: null });
+  }
+}
+
+
+//delete note route
 module.exports.deleteNote = async (req, res) => {
   try {
     const noteId = req.params.noteId;

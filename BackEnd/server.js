@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/autheCheck",require("./routes/protected-route"));
 app.use("/api/user", require("./routes/user-routes"));
-app.use("/api/notes", require("./routes/notes-routes"));
+app.use("/api/note", require("./routes/notes-routes"));
 
 const PORT = process.env.PORT || 3000;
 
