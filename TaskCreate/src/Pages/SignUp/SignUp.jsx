@@ -16,7 +16,7 @@ const SignUp = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await api.post("/api/user/register", {
+      const response = await api.post("api/user/register", {
         fullName,
         userName,
         email,
