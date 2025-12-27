@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await api.get("/autheCheck/me");
+        await api.get("api/autheCheck/me");
         setIsAuth(true);
       } catch (err) {
         setIsAuth(false);

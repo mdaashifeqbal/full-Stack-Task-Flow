@@ -5,31 +5,6 @@ import { useNavigate} from "react-router-dom";
 
 function NoteCard({ id, title, content,onDelete }) {
   const navigate = useNavigate();
-  // const handleDeleteNote = async (e) => {
-  //   e.preventDefault();
-  //   try{
-  //     const response = await api.delete(`/note/delete-note/${id}`);
-  //   if (response.data.success) {
-  //     toast.success(response.data.message);
-  //     navigate("/dashboard");
-  //   }
-  //   }catch(err)
-  //   {
-  //     if(!err.response)
-  //     {
-  //       toast.error("internal server error");
-  //     }
-  //     else if(err?.response?.status===404)
-  //     {
-  //       toast.error(err.response.data.message)
-  //     }
-  //     else if(err?.response?.status===500)
-  //     {
-  //       toast.error(err.response.data.message);
-  //     }
-  //   }
-  // };
-
   return (
     <div className="w-72 h-52 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
       <h3 className="mb-2 text-lg font-semibold text-gray-800">{title}</h3>

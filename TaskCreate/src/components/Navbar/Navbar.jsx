@@ -12,7 +12,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await api.get("/user/me", {
+        const response = await api.get("api/user/me", {
           withCredentials: true,
         });
         setUserName(response.data.user.userName);
@@ -35,7 +35,7 @@ const Navbar = () => {
     try {
       const userAnswer = confirm("Are you sure want to logout");
       if (userAnswer) {
-        await api.post("/user/logout");
+        await api.post("api/user/logout");
         navigate("/");
         toast.success("logout successful");
       }

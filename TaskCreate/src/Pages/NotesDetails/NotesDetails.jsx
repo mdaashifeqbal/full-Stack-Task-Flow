@@ -12,7 +12,7 @@ const NoteDetails = () => {
     const fetchNote = async () => {
       try {
         setLoading(true);
-        const response = await api.get(`/note/get-one-note/${id}`);
+        const response = await api.get(`api/note/get-one-note/${id}`);
         setNote(response.data.note);
       } catch (err) {
         alert("Unable to fetch note");

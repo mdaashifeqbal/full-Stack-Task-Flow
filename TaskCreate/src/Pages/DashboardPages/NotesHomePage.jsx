@@ -12,7 +12,7 @@ const NotesHomePage = () => {
   //delete note functions
   const handleDeleteNote = async (id) => {
     try {
-      const response = await api.delete(`/note/delete-note/${id}`);
+      const response = await api.delete(`api/note/delete-note/${id}`);
 
       if (response.data.success) {
         toast.success(response.data.message);
@@ -34,7 +34,7 @@ const NotesHomePage = () => {
       try {
         setLoader(true);
 
-        const userNotes = await api.get("/note/get-notes");
+        const userNotes = await api.get("api/note/get-notes");
 
         if (userNotes.status === 200) {
           setNotes(userNotes.data.notes);

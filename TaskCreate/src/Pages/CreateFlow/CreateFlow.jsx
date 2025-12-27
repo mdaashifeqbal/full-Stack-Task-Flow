@@ -12,7 +12,7 @@ const CreateFlow = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/note/create-note", {
+      const response = await api.post("api/note/create-note", {
         title,
         content,
       });
