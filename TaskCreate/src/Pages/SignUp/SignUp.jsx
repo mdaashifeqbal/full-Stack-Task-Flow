@@ -114,8 +114,9 @@ const SignUp = () => {
           </div>
 
           <button
-          type="submit"
-          className="mt-4 bg-yellow-500 text-black py-2 font-bold rounded-full hover:bg-yellow-400 transition-all duration-200 active:scale-95">
+            type="submit"
+            className="mt-4 bg-yellow-500 text-black py-2 font-bold rounded-full hover:bg-yellow-400 transition-all duration-200 active:scale-95"
+          >
             Register User
           </button>
         </form>
@@ -130,7 +131,7 @@ const SignUp = () => {
             Login to your flow account
           </button>
         </div>
-       <h2 className="text-center">Made with ❤️ by Aashif</h2>
+        <h2 className="text-center">Made with ❤️ by Aashif</h2>
       </div>
     </div>
   );
