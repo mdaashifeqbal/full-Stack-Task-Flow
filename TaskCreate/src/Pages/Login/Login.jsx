@@ -104,6 +104,8 @@ const Login = () => {
             }}
             className="cursor-pointer hover:text-blue-800 ">Create new flow account</button>
         </div>
+     <h2 className="text-center">Made with ❤️ by Aashif</h2>
+
       </div>
     </div>
   );

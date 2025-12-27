@@ -130,6 +130,7 @@ const SignUp = () => {
             Login to your flow account
           </button>
         </div>
+       <h2 className="text-center">Made with ❤️ by Aashif</h2>
       </div>
     </div>
   );
