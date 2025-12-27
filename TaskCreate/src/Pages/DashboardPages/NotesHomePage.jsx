@@ -71,7 +71,7 @@ const NotesHomePage = () => {
             </p>
           )}
 
-          {notes.reverse().map((note) => (
+          {[...notes].reverse().map((note) => (
             <NoteCard
               key={note._id}
               id={note._id}
