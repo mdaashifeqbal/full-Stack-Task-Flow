@@ -9,7 +9,7 @@ require("./config/mongoose-connect");
 
 app.use(
   cors({
-    origin: "https://my-flow-am71.onrender.com/",
+    origin: "https://my-flow-am71.onrender.com",
     credentials: true,
   })
 );
