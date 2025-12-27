@@ -28,8 +28,8 @@ module.exports.userRegister = async (req, res) => {
     await newUser.save();
     const token = generateToken(newUser);
     res.cookie("user_Token", token, {
-      httpOnly: true,
-      sameSite: "strict",
+      secure: true,
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     });
     res.status(201).json({
@@ -78,16 +78,14 @@ module.exports.userLogin = async (req, res) => {
       const token = generateToken(isUserExist);
       res.cookie("user_Token", token, {
         httpOnly: true,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000,
       });
-      res
-        .status(200)
-        .json({
-          message: "Login Successful",
-          success: true,
-         
-        });
+      res.status(200).json({
+        message: "Login Successful",
+        success: true,
+      });
     }
   } catch (err) {
     console.log("error from login user", err.message);
@@ -99,9 +97,11 @@ module.exports.userLogin = async (req, res) => {
 };
 
 //send user details route
-module.exports.me=async (req, res) => {
+module.exports.me = async (req, res) => {
   try {
-    const user = await userModel.findById(req.user._id).select("userName email");
+    const user = await userModel
+      .findById(req.user._id)
+      .select("userName email");
 
     if (!user) {
       return res.status(404).json({
@@ -120,13 +120,15 @@ module.exports.me=async (req, res) => {
       message: "Server error",
     });
   }
-}
+};
 
 //user logout route
 module.exports.logout = (req, res) => {
   try {
     res.clearCookie("user_Token", {
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
     });
 
     res.status(200).json({
