@@ -10,6 +10,7 @@ const {
   createNote,
   getNotes,
   specificNote,
+  updateNote,
   deleteNote,
 } = require("../controllers/notesControllers/notes-contolls");
 
@@ -23,9 +24,12 @@ router.post("/create-note", isLoggedIn, createNote);
 //delete note route
 router.delete("/delete-note/:noteId", isLoggedIn, deleteNote);
 
+//update note route
+router.patch("/update-note/:noteId", isLoggedIn, updateNote);
+
 //get note data route
 router.get("/get-notes", isLoggedIn, getNotes);
 
 //get specific note
-router.get("/get-one-note/:noteId", isLoggedIn,specificNote );
+router.get("/get-one-note/:noteId", isLoggedIn, specificNote);
 module.exports = router;

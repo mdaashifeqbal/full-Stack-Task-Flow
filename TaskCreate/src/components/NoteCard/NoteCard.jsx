@@ -3,7 +3,7 @@ import api from "../../api/axios";
 import toast from "react-hot-toast";
 import { useNavigate} from "react-router-dom";
 
-function NoteCard({ id, title, content,onDelete }) {
+function NoteCard({ id, title, content, onUpdate ,onDelete }) {
   const navigate = useNavigate();
   return (
     <div className="w-72 h-52 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
@@ -23,6 +23,9 @@ function NoteCard({ id, title, content,onDelete }) {
           className="rounded-md border border-green-600 px-4 py-1.5 text-sm text-green-600 hover:bg-green-600 hover:text-white transition"
         >
           Delete flow
+        </button>
+        <button className="text-black">
+          <Link to={`update-note/${id}`}>Update</Link>
         </button>
       </div>
     </div>

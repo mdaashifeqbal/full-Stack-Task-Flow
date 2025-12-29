@@ -7,6 +7,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import CreateFlow from "../Pages/CreateFlow/CreateFlow";
 import NotesHomePage from "../Pages/DashboardPages/NotesHomePage";
 import NoteDetails from "../Pages/NotesDetails/NotesDetails";
+import UpdateFlow from "../Pages/UpdateFlow/UpdateFlow";
 
 const router = createBrowserRouter([
   {
@@ -38,9 +39,13 @@ const router = createBrowserRouter([
             element: <CreateFlow />,
           },
           {
-            path:"note-details/:id",
-            element:<NoteDetails/>
-          }
+            path: "note-details/:id",
+            element: <NoteDetails />,
+          },
+          {
+            path: "update-note/:id",
+            element: <UpdateFlow />,
+          },
         ],
       },
     ],

@@ -88,6 +88,48 @@ module.exports.specificNote=async (req, res) => {
   }
 }
 
+//update note route
+module.exports.updateNote=async (req, res) => {
+  try {
+    const noteId = req.params.noteId;
+    const { title, content } = req.body;
+    // Find note
+    const note = await notesModel.findById(noteId);
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found",
+        success: false,
+      });
+    }
+
+    // Ownership check (CRITICAL)
+    if (note.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        message: "You are not allowed to delete this note",
+        success: false,
+      });
+    }
+
+    // Update note
+    await notesModel.findByIdAndUpdate(
+      noteId,
+      { title, content },
+      { new: true, runValidators: true }
+    );
+
+    //Success response
+    res.status(200).json({
+      message: "Note updated successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.error("Error while updating note:", err.message);
+    res.status(500).json({
+      message: "Internal server error. Please try again.",
+      success: false,
+    });
+  }
+}
 
 //delete note route
 module.exports.deleteNote = async (req, res) => {

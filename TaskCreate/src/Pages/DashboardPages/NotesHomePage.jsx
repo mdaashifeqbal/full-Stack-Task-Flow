@@ -29,6 +29,7 @@ const NotesHomePage = () => {
     }
   };
 
+  //get all notes
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -58,7 +59,7 @@ const NotesHomePage = () => {
   return (
     <div className="w-full h-full bg-linear-to-br from-slate-900 via-gray-900 to-black">
       <div className="w-full h-full overflow-y-auto px-4 sm:px-6 py-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-center">
           {loader && (
             <div className="col-span-full flex justify-center items-center py-10">
               <Spinner />

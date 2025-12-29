@@ -10,6 +10,7 @@ require("./config/mongoose-connect");
 app.use(
   cors({
     origin: "https://my-flow-am71.onrender.com",
+    // origin: "http://localhost:5173",
     credentials: true,
   })
 );
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
   res.send("All set Aashif you are a best backend engineer");
 });
 
-app.use("/api/autheCheck",require("./routes/protected-route"));
+app.use("/api/autheCheck", require("./routes/protected-route"));
 app.use("/api/user", require("./routes/user-routes"));
 app.use("/api/note", require("./routes/notes-routes"));
 
