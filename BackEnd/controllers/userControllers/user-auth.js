@@ -63,7 +63,7 @@ module.exports.userLogin = async (req, res) => {
     if (!isUserExist)
       return res
         .status(404)
-        .json({ message: "invalid credentials", success: false });
+        .json({ message: "user not exist", success: false });
 
     const originalPassword = await bcrypt.compare(
       password,
